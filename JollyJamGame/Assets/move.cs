@@ -18,6 +18,7 @@ public class move : MonoBehaviour {
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
+		goalSpeed = ((Vector3.magniture / rb2d.drag) - Time.fixedDeltaTime * Vector3.magnitude) / rb2d.mass;
 	}
 
 	void FixedUpdate () {
