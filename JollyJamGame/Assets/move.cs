@@ -14,8 +14,13 @@ public class move : MonoBehaviour {
 	public float speed_mult;
 	public bool trans;
 
+	private bool isWrappingX = false;
+	private bool isWrappingY = false;
+	private Renderer[] renderers;
+
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		renderers = GetComponentsInChildren<Renderer>();
 	}
 
 	void Update () {
@@ -23,10 +28,12 @@ public class move : MonoBehaviour {
 		if (trans) {
 			Application.LoadLevel(1);
 		}
+
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
 		rb2d.centerOfMass = Vector2.zero;
+		Debug.Log (rb2d.position);
 	}
 
 	//Movement
@@ -41,6 +48,40 @@ public class move : MonoBehaviour {
 		if (Mathf.Abs(rb2d.angularVelocity) < maxSpeed_rot) {			
 			rb2d.AddTorque (xAxis_rotate * rot);
 		}
+		ScreenWrap ();
+	}
+
+	void ScreenWrap() {
+		bool isVisible = CheckRenderers ();
+		if (isVisible) {
+			isWrappingX = false;
+			isWrappingY = false;
+			return;
+		}
+		if (isWrappingX && isWrappingY) {
+			return;
+		}
+		Vector3 newPos = transform.position;
+
+		if (newPos.x > 1 || newPos.x < 0) {
+			newPos.x = -newPos.x;
+			isWrappingX = true;
+		}
+		if (newPos.y > 1 || newPos.y < 0) {
+			newPos.y = -newPos.y;
+			isWrappingY = true;
+		}
+
+		transform.position = newPos;
+	}
+
+	bool CheckRenderers() { 
+		foreach (Renderer renderer in renderers) {
+			if (renderer.isVisible) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	//Picking up metal
