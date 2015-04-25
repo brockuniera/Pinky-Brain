@@ -78,9 +78,10 @@ public class move : MonoBehaviour {
 
 			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
 		}
-		ScreenWrap ();
+		//ScreenWrap ();
 	}
 
+/*
 	void ScreenWrap() {
 		bool isVisible = CheckRenderers ();
 		if (isVisible) {
@@ -113,7 +114,7 @@ public class move : MonoBehaviour {
 		}
 		return false;
 	}
-
+*/
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
@@ -129,6 +130,33 @@ public class move : MonoBehaviour {
 
 			//get heavier
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
+		}
+
+	}
+
+	public Transform tele_dest_low1;
+	public Transform tele_dest_low2;
+	public Transform tele_dest_low3;
+	public Transform tele_dest_low4;
+
+	void OnTriggerEnter2D(Collider2D c) {
+		if (c.gameObject.layer == LayerMask.NameToLayer ("wrap")) {
+			Vector3 newPos = transform.position;
+			
+			if (newPos.x > 1) {
+				newPos.x = tele_dest_low3.position.x;
+			}
+			if (newPos.x < 0) {
+				newPos.x = tele_dest_low2.position.x;
+			}
+			if (newPos.y > 1) {
+				newPos.y = tele_dest_low1.position.y;
+			}
+			if (newPos.y < 0) {
+				newPos.y = tele_dest_low4.position.y;
+			}
+			
+			transform.position = newPos;
 		}
 	}
 
