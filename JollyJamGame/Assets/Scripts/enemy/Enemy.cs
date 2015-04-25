@@ -5,6 +5,10 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
 	[SerializeField]
+	[Range(0.0f, 10.0f)]
+	private float difficulty;
+
+	[SerializeField]
 	private Transform player;
 
 	public Transform barrel;
@@ -17,6 +21,7 @@ public class Enemy : MonoBehaviour {
 
 	private Rigidbody2D rigidbody2D;
 
+	/*
 	[SerializeField]
 	private MovementType movementType;
 
@@ -25,6 +30,7 @@ public class Enemy : MonoBehaviour {
 
 	public enum MovementType { NULL, STRAFE, TACKLE, ELLIPTICAL };
 	public enum GunType { NULL, GUN, SHOTGUN };
+	*/
 
 	public IEnemyMovement movement;
 	public IWeapon weapon;
@@ -35,6 +41,9 @@ public class Enemy : MonoBehaviour {
 
 		transform.eulerAngles = new Vector3 (0.0f, 0.0f, 270.0f);
 
+		generate (difficulty);
+
+		/*
 		switch (movementType) {
 		case MovementType.STRAFE:
 			movement = new StrafeMovement(this, player.transform, 10.0f, acceleration);
@@ -65,6 +74,25 @@ public class Enemy : MonoBehaviour {
 		default: case GunType.NULL:
 			break;
 		}
+		*/
+	}
+
+	private void generate(float difficultyFactor)
+	{
+		float BaseFireRate = .5f;
+		float BaseSpeed = 4.0f;
+
+		if (Random.Range (0, 2) == 0)
+			weapon = new Gun (this, player.transform, projectile, BaseFireRate, 10.0f * difficultyFactor);
+		else
+			weapon = new Shotgun (this, player.transform, projectile, (BaseFireRate / 2.0f),
+			                            10.0f * difficultyFactor, 20.0f, (int)(difficultyFactor * 3.0f));
+		
+		if (Random.Range (0, 2) == 0)
+			movement = new StrafeMovement (this, player.transform, Random.Range (15.0f, 40.0f), BaseSpeed + (difficultyFactor * 2.0f));
+		else
+			movement = new EllipticalMovement (this, player.transform, BaseSpeed + (difficultyFactor * 2.0f), Random.Range (15.0f, 40.0f),
+			                                         Random.Range (15.0f, 40.0f));
 	}
 
 	public void Update()
