@@ -24,16 +24,17 @@ public class move : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
-			rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
+			rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move);
 		}
 		rb2d.AddTorque (xAxis_rotate);
 	}
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		print (c.gameObject);
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			c.transform.parent = this.transform;
+			c.gameObject.GetComponent<MetalPickup>().SetCollected(true);
 		}
 	}
 }
+
