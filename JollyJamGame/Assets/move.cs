@@ -45,14 +45,10 @@ public class move : MonoBehaviour {
 
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
-<<<<<<< HEAD
-		xAxis_rotate = Input.GetAxis ("HorizontalRight");
+		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
 		rb2d.centerOfMass = Vector2.zero;
 		Debug.Log (rb2d.position);
-=======
-		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
 
->>>>>>> 909a221e4612d5f35381ac0710bad4edf477c3e4
 	}
 
 	//Movement
