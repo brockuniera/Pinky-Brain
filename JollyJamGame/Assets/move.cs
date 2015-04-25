@@ -36,12 +36,19 @@ public class move : MonoBehaviour {
 	private bool isWrappingY = false;
 	private Renderer[] renderers;
 
+	private bool noArmorFlag;
+
 	public int pickups {
 		get { return numPickups (); }
 	}
 
 	//TODO Add losing weight
 	//public void 
+
+	void Awake()
+	{
+		noArmorFlag = false;
+	}
 
 	void Start () {
 		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
@@ -56,11 +63,20 @@ public class move : MonoBehaviour {
 			Application.LoadLevel("level1");
 		}
 
+		if (pickups <= 0 && !noArmorFlag) {
+			soundManager.loopSound ("NoArmor");
+			noArmorFlag = true;
+		} else if(pickups > 0 && noArmorFlag) {
+			soundManager.stopLoop("NoArmor");
+			noArmorFlag = false;
+		}
+		
 		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
 		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
+
 		rb2d.centerOfMass = Vector2.zero;
 	}
 
@@ -82,12 +98,23 @@ public class move : MonoBehaviour {
 			rb2d.angularVelocity = xAxis_rotate * rotSpeed;
 		}
 	}
+
+	//Drop all held metal
+	public void DropMetal(){
+		foreach(Transform c in transform){
+			if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
+				c.gameObject.GetComponent<MetalPickup>().Detach();
+			}
+		}
+	}
+
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			//Parenting
 			soundManager.playSound("Attach");
+
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers
