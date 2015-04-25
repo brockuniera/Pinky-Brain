@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour {
 
 	void Update(){
 		if(_timer.isDone){
-			print("DIEING!!!");
 			Object.Destroy(gameObject);
 		}
 	}

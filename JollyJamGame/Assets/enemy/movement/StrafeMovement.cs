@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StrafeMovement : WaypointMovement
 {
+	private int cw;
 	public float radius;
 
 	private float angle;
@@ -11,6 +12,7 @@ public class StrafeMovement : WaypointMovement
 	public StrafeMovement(Enemy enemy, Transform target, float radius, float acceleration) : 
 		base(enemy, target, acceleration)
 	{
+		cw = (UnityEngine.Random.Range (0, 2) == 0) ? -1 : 1;
 		this.radius = radius;
 
 		angle = (Vector2.Angle (enemy.transform.position, target.position) + 90.0f) * Mathf.PI / 180.0f;
@@ -19,7 +21,7 @@ public class StrafeMovement : WaypointMovement
 
 	public override void onWaypointReached()
 	{
-		radius += UnityEngine.Random.Range(-5.0f, 5.0f);
+		radius += UnityEngine.Random.Range (-5.0f, 5.0f) * cw;
 		angle += (dangle * Mathf.PI / 180.0f); angle %= Mathf.PI * 2;
 		waypoint = (new Vector2 (Mathf.Cos (angle), Mathf.Sin (angle)) * radius) + (Vector2)target.position;
 	}

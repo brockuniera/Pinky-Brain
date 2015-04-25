@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour {
 	[SerializeField]
 	private Transform player;
 
+	public Transform barrel;
+
 	[SerializeField]
 	private float acceleration;
 
@@ -20,6 +22,15 @@ public class Enemy : MonoBehaviour {
 	private Projectile projectile;
 
 	private Rigidbody2D rigidbody2D;
+
+	[SerializeField]
+	private MovementType movementType;
+
+	[SerializeField]
+	private GunType gunType;
+
+	public enum MovementType { NULL, STRAFE, TACKLE };
+	public enum GunType { NULL, GUN, SHOTGUN };
 
 	//
 	//Mutators
@@ -33,19 +44,39 @@ public class Enemy : MonoBehaviour {
 
 	void Awake() {
 		rigidbody2D = GetComponent<Rigidbody2D> ();
+		player = GameObject.FindWithTag("Player").transform;
+
+		switch (movementType) {
+		case MovementType.STRAFE:
+			movement = new StrafeMovement(this, player.transform, 10.0f, acceleration);
+			break;
+		
+		case MovementType.TACKLE:
+			movement = new TackleMovement(this, player.transform, acceleration);
+			break;
+
+		default: case MovementType.NULL:
+			break;
+		}
+
+		switch (gunType) {
+		case GunType.GUN:
+			weapon = new Gun(this, player.transform, projectile, 2.0f, 20.0f);
+			break;
+
+		case GunType.SHOTGUN:
+			weapon = new Shotgun(this, player.transform, projectile, 2.0f, 20.0f, 20.0f, 3);
+			break;
+
+		default: case GunType.NULL:
+			break;
+		}
 	}
 
 	public void Update()
 	{
 		weapon.aim (Time.deltaTime);
-
-		Projectile[] projectiles = weapon.fire ();
-		if (projectiles != null) {
-			for(int i = 0; i < projectiles.Length; i++)
-			{
-				// anything
-			}
-		}
+		weapon.fire ();
 	}
 
 	void FixedUpdate() {
