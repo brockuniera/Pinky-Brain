@@ -10,9 +10,11 @@ GameObject:
   - 4: {fileID: 474426}
   - 114: {fileID: 11450514}
   - 114: {fileID: 11456032}
+  - 114: {fileID: 11447500}
+  - 114: {fileID: 11450790}
   m_Layer: 0
   m_Name: Logic
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,6 +31,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11447500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eef30b0ad719942ad69e327362d1a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 4720aa79992bdb349b2dc38c3b1f655c, type: 3}
+  - {fileID: 8300000, guid: f7b3bb4d95c669f4f9e8caaa0d341bfc, type: 3}
+  - {fileID: 8300000, guid: 68aae2fc7d9a48d4d83c2c368342da59, type: 3}
+  - {fileID: 8300000, guid: 04f1fa1b1213b2049adf64717e0e7487, type: 3}
 --- !u!114 &11450514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,6 +58,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262414eca2ffa7e4a8e1ff2784f6ca19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11450790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1347c5b7952ea6a429689964f5505518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundManager: {fileID: 11447500}
 --- !u!114 &11456032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,8 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af93298351bb84e8fbed275af8a0e96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseSpeed: .00999999978
-  TackleSpeedMultiplier: .100000001
+  BaseSpeed: 1
   BaseFireRate: 2
 --- !u!1001 &100100000
 Prefab:

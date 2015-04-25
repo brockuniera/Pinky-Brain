@@ -15,9 +15,9 @@ TagManager:
   - 
   - Pickups
   - Bullets
-  - 
-  - 
-  - 
+  - Enemies
+  - PlayerHeld
+  - Player
   - 
   - 
   - 

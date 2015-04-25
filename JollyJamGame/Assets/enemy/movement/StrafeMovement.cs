@@ -21,6 +21,9 @@ public class StrafeMovement : WaypointMovement
 
 	public override void onWaypointReached()
 	{
+		if (UnityEngine.Random.value < 0.3f)
+			cw *= -1;
+
 		radius += UnityEngine.Random.Range (-0.5f, 0.5f);
 		angle += (dangle * Mathf.PI / 180.0f) * cw; angle %= Mathf.PI * 2;
 		waypoint = (new Vector2 (Mathf.Cos (angle), Mathf.Sin (angle)) * radius) + (Vector2)target.position;

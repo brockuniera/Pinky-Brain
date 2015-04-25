@@ -17,9 +17,12 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
-	// boom go here
-	public void onContact()
-	{
-
+	void OnTriggerEnter2D(Collider2D c){
+		if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
+			Destroy(c.transform.parent.gameObject);
+		}
+		GameObject.Destroy (GetComponent<Rigidbody2D> ());
+		Destroy (gameObject, 0.5f);
 	}
 }
+

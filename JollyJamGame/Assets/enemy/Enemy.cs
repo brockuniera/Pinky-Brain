@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 	[SerializeField]
 	private GunType gunType;
 
-	public enum MovementType { NULL, STRAFE, TACKLE };
+	public enum MovementType { NULL, STRAFE, TACKLE, ELLIPTICAL };
 	public enum GunType { NULL, GUN, SHOTGUN };
 
 	public IEnemyMovement movement;
@@ -41,20 +41,25 @@ public class Enemy : MonoBehaviour {
 			break;
 		
 		case MovementType.TACKLE:
-			movement = new TackleMovement(this, player.transform, acceleration);
+			movement = new StrafeMovement(this, player.transform, 10.0f, acceleration);
 			break;
 
+		case MovementType.ELLIPTICAL:
+			movement = new EllipticalMovement (this, player.transform, acceleration, Random.Range(3.0f, 10.0f),
+			                                   Random.Range(3.0f, 10.0f));
+			break;
+			
 		default: case MovementType.NULL:
 			break;
 		}
 
 		switch (gunType) {
 		case GunType.GUN:
-			weapon = new Gun(this, player.transform, projectile, 2.0f, 5.0f);
+			weapon = new Gun(this, player.transform, projectile, 0.5f, 20.0f);
 			break;
 
 		case GunType.SHOTGUN:
-			weapon = new Shotgun(this, player.transform, projectile, 2.0f, 20.0f, 20.0f, 3);
+			weapon = new Shotgun(this, player.transform, projectile, 0.5f, 20.0f, 20.0f, 3);
 			break;
 
 		default: case GunType.NULL:

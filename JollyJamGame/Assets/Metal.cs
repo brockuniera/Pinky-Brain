@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class Metal : MonoBehaviour {
+	public bool IsRandom = false;
+
 	public float weight;
-	public float min;
-	public float max;
-	// Use this for initialization
+
+	public float Min;
+	public float Max;
+
+
 	void Start () {
-		weight += Random.Range (min, max);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		if(IsRandom)
+			weight = Random.Range(Min, Max);
 	}
 
 }
