@@ -510,11 +510,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 142484, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
       propertyPath: m_Name
-      value: Metal 2
+      value: Metal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1722449984 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 142484, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
+  m_PrefabInternal: {fileID: 1722449983}
+--- !u!114 &1722449985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1722449984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887fa7bf1c9986d409f80b4cda7db0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  min: 0
+  max: 0
 --- !u!1 &1784605923
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +613,10 @@ Prefab:
     - target: {fileID: 463944, guid: 9a61cee03892e4f32b1529bf0f101e2b, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11434588, guid: 9a61cee03892e4f32b1529bf0f101e2b, type: 2}
+      propertyPath: weight
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a61cee03892e4f32b1529bf0f101e2b, type: 2}
@@ -691,10 +713,6 @@ Prefab:
     - target: {fileID: 483062, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 142484, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
-      propertyPath: m_Name
-      value: Metal 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8150c919f21cb4e7f863691793d7e2a5, type: 2}
