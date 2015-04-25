@@ -8,21 +8,22 @@ public class move : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	public float alt_move;
 	public float goalSpeed;
+	public float weight;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
-		goalSpeed = ((Vector3.magniture / rb2d.drag) - Time.fixedDeltaTime * Vector3.magnitude) / rb2d.mass;
+		rb2d.centerOfMass = Vector2.zero;
 	}
 
 	void FixedUpdate () {
-		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
+		if (rb2d.velocity.sqrMagnitude <= goalSpeed) {
 			rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		}
 		rb2d.AddTorque (xAxis_rotate);
@@ -30,9 +31,9 @@ public class move : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		print (c.gameObject);
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			c.transform.parent = this.transform;
+			weight += c.gameObject.GetComponent<Metal>().weight;
 		}
 	}
 }
