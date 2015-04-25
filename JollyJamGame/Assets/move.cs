@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class move : MonoBehaviour {
+	private SoundManager soundManager;
+
 	//Input vars
 	//
 	private float xAxis_rotate;
@@ -33,6 +35,8 @@ public class move : MonoBehaviour {
 	//public void 
 
 	void Start () {
+		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
+
 		rb2d = GetComponent<Rigidbody2D> ();
 		renderers = GetComponentsInChildren<Renderer>();
 	}
@@ -111,6 +115,7 @@ public class move : MonoBehaviour {
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			//Parenting
+			soundManager.playSound("Attach");
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers
