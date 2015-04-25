@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class move : MonoBehaviour {
+	//Death
+	//
+	public bool isDead {get; set;}
+
 	private SoundManager soundManager;
 
 	//Input vars
@@ -20,7 +24,8 @@ public class move : MonoBehaviour {
 
 	//Rotation
 	//
-	public float RotationSpeed;
+	public float MaxRotationSpeedMult;
+	public float MaxRotationSpeedBase;
 
 	//Acceleration
 	public float speed_max;
@@ -46,16 +51,17 @@ public class move : MonoBehaviour {
 	}
 
 	void Update () {
-		//Read input values
+		//For loading levels or something
 		if (trans) {
 			Application.LoadLevel(1);
 		}
 
+		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
+		xAxis_rotate = Input.GetAxis ("HorizontalRight");
 		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
 		rb2d.centerOfMass = Vector2.zero;
-
 	}
 
 	//Movement
@@ -70,12 +76,10 @@ public class move : MonoBehaviour {
 			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		} 
 		if(xAxis_rotate != 0.0f){
-			/*
-			float rotMax = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
-			print(rotMax);
-			*/
+			float rotSpeed = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
+			print(rotSpeed);
 
-			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
+			rb2d.angularVelocity = xAxis_rotate * rotSpeed;
 		}
 	}
 	//Picking up metal
@@ -127,7 +131,8 @@ public class move : MonoBehaviour {
 	{
 		int o = 0;
 		foreach (Transform t in transform) {
-			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups")) o++;
+			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups"))
+				o++;
 		}
 		
 		return o;
