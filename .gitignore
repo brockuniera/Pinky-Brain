@@ -19,3 +19,11 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+#Vim things
+*~
+*.swp
+*.swo
+
+#OSX things
+.DS_Store
