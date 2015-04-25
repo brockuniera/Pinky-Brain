@@ -18,6 +18,8 @@ public class move : MonoBehaviour {
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
+
+		rb2d.centerOfMass = Vector2.zero;
 	}
 
 	void FixedUpdate () {
