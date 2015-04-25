@@ -12,6 +12,7 @@ public class move : MonoBehaviour {
 	private float maxSpeed_rot; 
 	public float speed_max;
 	public float speed_mult;
+	public bool trans;
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -19,6 +20,9 @@ public class move : MonoBehaviour {
 
 	void Update () {
 		//Read input values
+		if (trans) {
+			Application.LoadLevel(1);
+		}
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
