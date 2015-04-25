@@ -8,6 +8,8 @@ public class move : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	public float alt_move;
 	private float goalSpeed;
+	public float rot;
+	private float maxSpeed_rot; 
 	public float speed_max;
 	public float speed_mult;
 	// Use this for initialization
@@ -25,14 +27,15 @@ public class move : MonoBehaviour {
 
 	void FixedUpdate () {
 		goalSpeed = speed_mult * rb2d.mass + speed_max;
-		Debug.Log (goalSpeed);
-		Debug.Log (rb2d.velocity.sqrMagnitude);
 		Vector2 force_added = new Vector2 (xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
 			rb2d.AddForce(force_added);
 			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
+		} 
+		maxSpeed_rot = speed_max * rb2d.mass * rot;
+		if (Mathf.Abs(rb2d.angularVelocity) < maxSpeed_rot) {			
+			rb2d.AddTorque (xAxis_rotate * rot);
 		}
-		rb2d.AddTorque (xAxis_rotate);
 	}
 
 	void OnCollisionEnter2D(Collision2D c)
