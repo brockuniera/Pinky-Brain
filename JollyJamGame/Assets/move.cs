@@ -31,6 +31,10 @@ public class move : MonoBehaviour {
 	private bool isWrappingY = false;
 	private Renderer[] renderers;
 
+	public int pickups {
+		get { return numPickups (); }
+	}
+
 	//TODO Add losing weight
 	//public void 
 
@@ -126,6 +130,16 @@ public class move : MonoBehaviour {
 			//get heavier
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
 		}
+	}
+
+	private int numPickups()
+	{
+		int o = 0;
+		foreach (Transform t in transform) {
+			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups")) o++;
+		}
+		
+		return o;
 	}
 }
 
