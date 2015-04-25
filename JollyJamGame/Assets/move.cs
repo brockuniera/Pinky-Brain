@@ -55,7 +55,6 @@ public class move : MonoBehaviour {
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
 		rb2d.centerOfMass = Vector2.zero;
-		Debug.Log (rb2d.position);
 
 	}
 
@@ -78,43 +77,7 @@ public class move : MonoBehaviour {
 
 			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
 		}
-		//ScreenWrap ();
 	}
-
-/*
-	void ScreenWrap() {
-		bool isVisible = CheckRenderers ();
-		if (isVisible) {
-			isWrappingX = false;
-			isWrappingY = false;
-			return;
-		}
-		if (isWrappingX && isWrappingY) {
-			return;
-		}
-		Vector3 newPos = transform.position;
-
-		if (newPos.x > 1 || newPos.x < 0) {
-			newPos.x = -newPos.x;
-			isWrappingX = true;
-		}
-		if (newPos.y > 1 || newPos.y < 0) {
-			newPos.y = -newPos.y;
-			isWrappingY = true;
-		}
-
-		transform.position = newPos;
-	}
-
-	bool CheckRenderers() { 
-		foreach (Renderer renderer in renderers) {
-			if (renderer.isVisible) {
-				return true;
-			}
-		}
-		return false;
-	}
-*/
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
@@ -147,10 +110,10 @@ public class move : MonoBehaviour {
 				newPos.x = tele_dest_low3.position.x;
 			}
 			if (newPos.x < 0) {
-				newPos.x = tele_dest_low2.position.x;
+				newPos.x = tele_dest_low1.position.x;
 			}
 			if (newPos.y > 1) {
-				newPos.y = tele_dest_low1.position.y;
+				newPos.y = tele_dest_low2.position.y;
 			}
 			if (newPos.y < 0) {
 				newPos.y = tele_dest_low4.position.y;
