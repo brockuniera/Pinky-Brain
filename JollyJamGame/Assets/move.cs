@@ -7,8 +7,9 @@ public class move : MonoBehaviour {
 	private float yAxis_move;
 	private Rigidbody2D rb2d;
 	public float alt_move;
-	public float goalSpeed;
-	public float weight;
+	private float goalSpeed;
+	public float speed_max;
+	public float speed_mult;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -23,8 +24,13 @@ public class move : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		goalSpeed = speed_mult * rb2d.mass + speed_max;
+		Debug.Log (goalSpeed);
+		Debug.Log (rb2d.velocity.sqrMagnitude);
+		Vector2 force_added = new Vector2 (xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
-			rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
+			rb2d.AddForce(force_added);
+			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		}
 		rb2d.AddTorque (xAxis_rotate);
 	}
@@ -34,7 +40,7 @@ public class move : MonoBehaviour {
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			c.transform.parent = this.transform;
 			c.gameObject.GetComponent<MetalPickup>().SetCollected(true);
-			weight += c.gameObject.GetComponent<Metal>().weight;
+			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
 		}
 	}
 }

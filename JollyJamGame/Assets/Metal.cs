@@ -7,7 +7,7 @@ public class Metal : MonoBehaviour {
 	public float max;
 	// Use this for initialization
 	void Start () {
-		weight = Random.Range (min, max);
+		weight += Random.Range (min, max);
 	}
 	
 	// Update is called once per frame

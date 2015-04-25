@@ -21,7 +21,7 @@ public class MetalPickup : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c)
 	{
-		if(_collected){
+		if(_collected && c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
 			c.transform.parent = transform;
 		}
 
