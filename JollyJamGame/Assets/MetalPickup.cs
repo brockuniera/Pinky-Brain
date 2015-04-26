@@ -33,23 +33,21 @@ public class MetalPickup : MonoBehaviour {
 		if(_collected){
 			//Getting hit by a bullet
 			if(c.gameObject.layer == LayerMask.NameToLayer("Bullets")){
-				print("BULLET HIT ME :(");
 				if(--HitPoints == 0){
 					Detach();
 					_collected = false;
 				}
-				//Destroy(c.gameObject);
 			}
 		}
 	}
 
 	//Picking up metal
-	void OnCollisionEnter2D(Collision2D c)
-	{
+	void OnCollisionEnter2D(Collision2D c) {
 		if(_collected){
 			//Picking up more metal
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
 				c.transform.parent = transform;
+				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			}
 		}
 
@@ -59,10 +57,8 @@ public class MetalPickup : MonoBehaviour {
 	public void Detach(){
 		transform.parent = null;
 		Destroy(gameObject);
-		/*
 		_collectable = false;
 		_collect_timer.SetTimer(TimeToRecollect);
-		*/
 	}
 
 }

@@ -47,6 +47,7 @@ public class move : MonoBehaviour {
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			c.transform.parent = this.transform;
+			c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			c.gameObject.GetComponent<MetalPickup>().SetCollected(true);
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
 		}
