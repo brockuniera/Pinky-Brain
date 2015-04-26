@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 469106}
   - 60: {fileID: 6017896}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457250}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RockSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - 33: {fileID: 3305092}
   - 23: {fileID: 2371458}
   - 95: {fileID: 9590452}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

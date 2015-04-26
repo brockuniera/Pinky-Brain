@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 493402}
   - 50: {fileID: 5085764}
   - 114: {fileID: 11481146}
-  m_Layer: 0
+  - 114: {fileID: 11487040}
+  m_Layer: 10
   m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +26,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 493974}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 491230}
   - 60: {fileID: 6003370}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +59,7 @@ GameObject:
   - 4: {fileID: 427954}
   - 33: {fileID: 3324800}
   - 23: {fileID: 2370578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,8 +96,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113414}
-  m_LocalRotation: {x: -.491212815, y: .493158966, z: .549608231, w: -.461990356}
-  m_LocalPosition: {x: 2.94000006, y: -1.90999997, z: 0}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 17.3600006, y: -.699999988, z: 0}
   m_LocalScale: {x: .556249976, y: .5, z: .5}
   m_Children:
   - {fileID: 427954}
@@ -176,6 +177,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -.540143967, y: .694701135}
+      - {x: -.199474812, y: 1.37596726}
+      - {x: .210082248, y: 1.36842442}
       - {x: .523638248, y: .703556359}
       - {x: .61709404, y: .392164111}
       - {x: .638065338, y: -.384710848}
@@ -199,6 +202,17 @@ MonoBehaviour:
   barrel: {fileID: 493974}
   acceleration: .100000001
   projectile: {fileID: 11401904, guid: 6a1f1292a7441364d81946cb5e848695, type: 2}
+--- !u!114 &11487040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f92fdb4b6ab8a947a6838b8fe835ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

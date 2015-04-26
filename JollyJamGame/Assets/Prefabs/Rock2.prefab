@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 460080}
   - 60: {fileID: 6018128}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 33: {fileID: 3330962}
   - 23: {fileID: 2302834}
   - 95: {fileID: 9556400}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Rock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
