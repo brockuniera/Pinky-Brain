@@ -25,9 +25,11 @@ public class Projectile : MonoBehaviour {
 		if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
 			Destroy(c.transform.parent.gameObject);
 			soundManager.playSound("Boom");
+			soundManager.playSound("Ricochet2");
 		}
 		else if(c.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
+			soundManager.playSound("PlayerGetsHit");
 			Application.LoadLevel(Application.loadedLevel);
 		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
