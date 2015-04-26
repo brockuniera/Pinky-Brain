@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour {
 
 	private Timer _timer;
 	public float TimeToDie = 10f;
+	public float ForceToAdd;
 
 	void Start(){
 		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
@@ -23,7 +24,10 @@ public class Projectile : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c){
 		if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
-			Destroy(c.transform.parent.gameObject);
+			//Push against player
+			Vector2 offset = (GetComponent<Rigidbody2D>().velocity).normalized;
+			c.attachedRigidbody.AddForce(offset * ForceToAdd);
+			c.transform.parent.gameObject.GetComponent<MetalPickup>().Detach();
 			soundManager.playSound("Boom");
 		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
