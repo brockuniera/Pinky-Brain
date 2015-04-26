@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class move : MonoBehaviour {
+	//Death
+	//
+	public bool isDead {get; set;}
+
 	private SoundManager soundManager;
 
 	//Input vars
@@ -20,7 +24,8 @@ public class move : MonoBehaviour {
 
 	//Rotation
 	//
-	public float RotationSpeed;
+	public float MaxRotationSpeedMult;
+	public float MaxRotationSpeedBase;
 
 	//Acceleration
 	public float speed_max;
@@ -53,7 +58,7 @@ public class move : MonoBehaviour {
 	}
 
 	void Update () {
-		//Read input values
+		//For loading levels or something
 		if (trans) {
 			Application.LoadLevel(1);
 		}
@@ -65,14 +70,13 @@ public class move : MonoBehaviour {
 			soundManager.stopLoop("NoArmor");
 			noArmorFlag = false;
 		}
-
+		
+		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
-		rb2d.centerOfMass = Vector2.zero;
-		Debug.Log (rb2d.position);
-
 		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
+		rb2d.centerOfMass = Vector2.zero;
 	}
 
 	//Movement
@@ -87,49 +91,12 @@ public class move : MonoBehaviour {
 			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		} 
 		if(xAxis_rotate != 0.0f){
-			/*
-			float rotMax = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
-			print(rotMax);
-			*/
+			float rotSpeed = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
+			print(rotSpeed);
 
-			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
+			rb2d.angularVelocity = xAxis_rotate * rotSpeed;
 		}
-		ScreenWrap ();
 	}
-
-	void ScreenWrap() {
-		bool isVisible = CheckRenderers ();
-		if (isVisible) {
-			isWrappingX = false;
-			isWrappingY = false;
-			return;
-		}
-		if (isWrappingX && isWrappingY) {
-			return;
-		}
-		Vector3 newPos = transform.position;
-
-		if (newPos.x > 1 || newPos.x < 0) {
-			newPos.x = -newPos.x;
-			isWrappingX = true;
-		}
-		if (newPos.y > 1 || newPos.y < 0) {
-			newPos.y = -newPos.y;
-			isWrappingY = true;
-		}
-
-		transform.position = newPos;
-	}
-
-	bool CheckRenderers() { 
-		foreach (Renderer renderer in renderers) {
-			if (renderer.isVisible) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
@@ -147,13 +114,41 @@ public class move : MonoBehaviour {
 			//get heavier
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
 		}
+
+	}
+
+	public Transform tele_dest_low1;
+	public Transform tele_dest_low2;
+	public Transform tele_dest_low3;
+	public Transform tele_dest_low4;
+
+	void OnTriggerEnter2D(Collider2D c) {
+		if (c.gameObject.layer == LayerMask.NameToLayer ("wrap")) {
+			Vector3 newPos = transform.position;
+			
+			if (newPos.x > 1) {
+				newPos.x = tele_dest_low3.position.x;
+			}
+			if (newPos.x < 0) {
+				newPos.x = tele_dest_low1.position.x;
+			}
+			if (newPos.y > 1) {
+				newPos.y = tele_dest_low2.position.y;
+			}
+			if (newPos.y < 0) {
+				newPos.y = tele_dest_low4.position.y;
+			}
+			
+			transform.position = newPos;
+		}
 	}
 
 	private int numPickups()
 	{
 		int o = 0;
 		foreach (Transform t in transform) {
-			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups")) o++;
+			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups"))
+				o++;
 		}
 		
 		return o;
