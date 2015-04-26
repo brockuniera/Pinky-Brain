@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour {
 			soundManager.playSound("Boom");
 		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
+		GameObject.Destroy (GetComponent<Collider2D> ());
 		Destroy (gameObject, 0.5f);
 	}
 }
