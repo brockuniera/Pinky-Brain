@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class move : MonoBehaviour {
+	private SoundManager soundManager;
+
 	//Input vars
 	//
 	private float xAxis_rotate;
@@ -23,20 +25,35 @@ public class move : MonoBehaviour {
 	//Acceleration
 	public float speed_max;
 	public float speed_mult;
+	public bool trans;
+
+	private bool isWrappingX = false;
+	private bool isWrappingY = false;
+	private Renderer[] renderers;
 
 	//TODO Add losing weight
 	//public void 
 
 	void Start () {
+		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
+
 		rb2d = GetComponent<Rigidbody2D> ();
+		renderers = GetComponentsInChildren<Renderer>();
 	}
 
 	void Update () {
 		//Read input values
+		if (trans) {
+			Application.LoadLevel(1);
+		}
+
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
-		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
+		xAxis_rotate = Input.GetAxis ("HorizontalRight");
+		rb2d.centerOfMass = Vector2.zero;
+		Debug.Log (rb2d.position);
 
+		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
 	}
 
 	//Movement
@@ -58,6 +75,40 @@ public class move : MonoBehaviour {
 
 			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
 		}
+		ScreenWrap ();
+	}
+
+	void ScreenWrap() {
+		bool isVisible = CheckRenderers ();
+		if (isVisible) {
+			isWrappingX = false;
+			isWrappingY = false;
+			return;
+		}
+		if (isWrappingX && isWrappingY) {
+			return;
+		}
+		Vector3 newPos = transform.position;
+
+		if (newPos.x > 1 || newPos.x < 0) {
+			newPos.x = -newPos.x;
+			isWrappingX = true;
+		}
+		if (newPos.y > 1 || newPos.y < 0) {
+			newPos.y = -newPos.y;
+			isWrappingY = true;
+		}
+
+		transform.position = newPos;
+	}
+
+	bool CheckRenderers() { 
+		foreach (Renderer renderer in renderers) {
+			if (renderer.isVisible) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	//Picking up metal
@@ -65,6 +116,7 @@ public class move : MonoBehaviour {
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			//Parenting
+			soundManager.playSound("Attach");
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers

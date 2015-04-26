@@ -9,7 +9,7 @@ public class MetalPickup : MonoBehaviour {
 	private Timer _collect_timer;
 	public float TimeToRecollect;
 
-	private SoundManager soundManager;
+
 
 	//My hit points
 	public int HitPoints = 1;
@@ -21,8 +21,6 @@ public class MetalPickup : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_collect_timer = new Timer();
-
-		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
 	}
 	
 	// Update is called once per frame
@@ -54,7 +52,6 @@ public class MetalPickup : MonoBehaviour {
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
 				c.transform.parent.parent = this.transform; //Wow lol
 				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
-				soundManager.playSound("Attach");
 			}
 		}
 	}

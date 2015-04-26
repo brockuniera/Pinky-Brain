@@ -39,7 +39,7 @@ public class Gun : IWeapon
 		} else {
 			Vector2 to = target.position - enemy.transform.position;
 			float angle = (Mathf.Atan2(to.y, to.x) * Mathf.Rad2Deg + UnityEngine.Random.Range(-5.0f, 5.0f)) * Mathf.Deg2Rad;
-
+			
 			Rigidbody2D bullet = (UnityEngine.Object.Instantiate(projectile).gameObject).GetComponent<Rigidbody2D>();
 
 			if(enemy.barrel != null) bullet.gameObject.transform.position = enemy.barrel.transform.position;
