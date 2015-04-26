@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class MetalPickup : MonoBehaviour {
+	//How deep in the parent tree are we
+	public int Depth = 0;
+
 	private bool _collected = false;
 
 	//Am I currently collectable by player?
@@ -30,38 +33,35 @@ public class MetalPickup : MonoBehaviour {
 		}
 	}
 
-	//Bullets
-	/*
-	void OnTriggerEnter2D(Collider2D c){
-		if(_collected){
-			//Getting hit by a bullet
-			if(c.gameObject.layer == LayerMask.NameToLayer("Bullets")){
-				if(--HitPoints == 0){
-					Detach();
-					_collected = false;
-				}
-			}
-		}
-	}
-	*/
-
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c) {
 		if(_collected){
 			//Picking up more metal
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
-				c.transform.parent.parent = this.transform; //Wow lol
+				c.transform.parent.parent = this.transform;
 				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			}
 		}
 	}
 
 	//Handles detaching this metal and child metals too
-	public void Detach(){
+	public float Detach(){
 		transform.parent = null;
-		Destroy(gameObject); //We just die right now
+
 		_collectable = false;
 		_collect_timer.SetTimer(TimeToRecollect);
+
+		Destroy(gameObject); //We just die right now
+
+		//Kill children
+		float subtreemass = 0.0f;
+		foreach(Transform child in transform){
+			GameObject go = child.gameObject;
+			if(go.tag == "Metal"){
+				subtreemass += go.GetComponent<MetalPickup>().Detach();
+			}
+		}
+		return subtreemass;
 	}
 
 }

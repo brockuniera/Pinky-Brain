@@ -85,12 +85,24 @@ public class move : MonoBehaviour {
 		//Every frame, to ensure rotations are correct
 		rb2d.centerOfMass = Vector2.zero;
 
-		float goalSpeed = speed_mult * rb2d.mass + speed_max;
-		Vector2 force_added = new Vector2 (xAxis_move * alt_move, yAxis_move * alt_move * -1f);
-		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
-			rb2d.AddForce(force_added);
-			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
-		} 
+		float maxSpeed = speed_mult * rb2d.mass + speed_max;
+		Vector2 forceDir = new Vector2(xAxis_move, yAxis_move * -1f);
+
+
+		//Push harder when "braking"
+		if(forceDir.x < 0 != rb2d.velocity.x < 0){
+			forceDir.x *= 2;
+		}
+		if(forceDir.y < 0 != rb2d.velocity.y < 0){
+			forceDir.y *= 2;
+		}
+
+		//Move player
+		rb2d.AddForce(forceDir * alt_move);
+
+		//Cap the speed
+		rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
+
 		if(xAxis_rotate != 0.0f){
 			float rotSpeed = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
 			print(rotSpeed);
@@ -103,7 +115,7 @@ public class move : MonoBehaviour {
 	public void DropMetal(){
 		foreach(Transform c in transform){
 			if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
-				c.gameObject.GetComponent<MetalPickup>().Detach();
+				rb2d.mass -= c.gameObject.GetComponent<MetalPickup>().Detach();
 			}
 		}
 	}

@@ -159,9 +159,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alt_move: 5
-  rot: 5
+  MaxRotationSpeedMult: -3
+  MaxRotationSpeedBase: 150
   speed_max: 15
   speed_mult: -2
+  trans: 0
+  tele_dest_low1: {fileID: 0}
+  tele_dest_low2: {fileID: 0}
+  tele_dest_low3: {fileID: 0}
+  tele_dest_low4: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
