@@ -32,9 +32,11 @@ public class Projectile : MonoBehaviour {
 			//Knock/destroy metal or whatever
 			c.transform.parent.gameObject.GetComponent<MetalPickup>().Detach();
 			soundManager.playSound("Boom");
+			soundManager.playSound("Ricochet2");
 		}
 		else if(c.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
+			soundManager.playSound("PlayerGetsHit");
 			GameObject player = c.transform.parent.gameObject;
 			if(player.GetComponent<move>().pickups == 0){
 				//you died, idiot!

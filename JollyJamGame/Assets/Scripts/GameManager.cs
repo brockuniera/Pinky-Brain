@@ -17,11 +17,12 @@ public class GameManager : MonoBehaviour
 
 	public void Start()
 	{
-		soundManager.loopSound ("Armored Theme");
+		soundManager.loopSound ("Armored Theme", 0.2f);
 	}
 
 	public void advanceWave()
 	{
+		soundManager.playSound ("WaveStart");
 		waveCard.showWave (++wave);
 	}
 }

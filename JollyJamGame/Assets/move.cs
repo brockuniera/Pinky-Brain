@@ -36,12 +36,19 @@ public class move : MonoBehaviour {
 	private bool isWrappingY = false;
 	private Renderer[] renderers;
 
+	private bool noArmorFlag;
+
 	public int pickups {
 		get { return numPickups (); }
 	}
 
 	//TODO Add losing weight
 	//public void 
+
+	void Awake()
+	{
+		noArmorFlag = false;
+	}
 
 	void Start () {
 		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
@@ -56,6 +63,14 @@ public class move : MonoBehaviour {
 			Application.LoadLevel(1);
 		}
 
+		if (pickups <= 0 && !noArmorFlag) {
+			soundManager.loopSound ("NoArmor");
+			noArmorFlag = true;
+		} else if(pickups > 0 && noArmorFlag) {
+			soundManager.stopLoop("NoArmor");
+			noArmorFlag = false;
+		}
+		
 		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
@@ -82,43 +97,7 @@ public class move : MonoBehaviour {
 
 			rb2d.angularVelocity = xAxis_rotate * rotSpeed;
 		}
-		//ScreenWrap ();
 	}
-
-/*
-	void ScreenWrap() {
-		bool isVisible = CheckRenderers ();
-		if (isVisible) {
-			isWrappingX = false;
-			isWrappingY = false;
-			return;
-		}
-		if (isWrappingX && isWrappingY) {
-			return;
-		}
-		Vector3 newPos = transform.position;
-
-		if (newPos.x > 1 || newPos.x < 0) {
-			newPos.x = -newPos.x;
-			isWrappingX = true;
-		}
-		if (newPos.y > 1 || newPos.y < 0) {
-			newPos.y = -newPos.y;
-			isWrappingY = true;
-		}
-
-		transform.position = newPos;
-	}
-
-	bool CheckRenderers() { 
-		foreach (Renderer renderer in renderers) {
-			if (renderer.isVisible) {
-				return true;
-			}
-		}
-		return false;
-	}
-*/
 
 	//Drop all held metal
 	public void DropMetal(){
@@ -135,6 +114,7 @@ public class move : MonoBehaviour {
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			//Parenting
 			soundManager.playSound("Attach");
+
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers
@@ -161,10 +141,10 @@ public class move : MonoBehaviour {
 				newPos.x = tele_dest_low3.position.x;
 			}
 			if (newPos.x < 0) {
-				newPos.x = tele_dest_low2.position.x;
+				newPos.x = tele_dest_low1.position.x;
 			}
 			if (newPos.y > 1) {
-				newPos.y = tele_dest_low1.position.y;
+				newPos.y = tele_dest_low2.position.y;
 			}
 			if (newPos.y < 0) {
 				newPos.y = tele_dest_low4.position.y;
