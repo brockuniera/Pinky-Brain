@@ -31,7 +31,8 @@ public abstract class WaypointMovement : IEnemyMovement
 	public virtual void move(float timestep)
 	{
 		WaypointDistanceThreshold = Mathf.Max (acceleration / 2.0f, MinimumWaypointDistanceThreshold);
-		rigidbody2D.AddForce ((waypoint - (Vector2)enemy.transform.position).normalized * acceleration, ForceMode2D.Force);
+		rigidbody2D.AddForce ((waypoint - (Vector2)enemy.transform.position).normalized * acceleration * Time.fixedDeltaTime,
+		                      ForceMode2D.Force);
 		
 		if(Vector2.Distance(waypoint, enemy.transform.position) < WaypointDistanceThreshold)
 		{
