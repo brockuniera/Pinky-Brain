@@ -194,12 +194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10c8bfccd1ad604297c1db2d9428244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 1
   player: {fileID: 0}
   barrel: {fileID: 493974}
   acceleration: .100000001
   projectile: {fileID: 11401904, guid: 6a1f1292a7441364d81946cb5e848695, type: 2}
-  movementType: 1
-  gunType: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

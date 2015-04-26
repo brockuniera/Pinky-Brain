@@ -15,7 +15,7 @@ public class Shotgun : Gun
 
 	public override Projectile[] fire()
 	{
-		if (fireTimer <= fireRate) {
+		if (fireTimer <= fireThreshold) {
 			return null;
 		} else {
 			fireTimer = 0.0f;
