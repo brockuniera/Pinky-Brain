@@ -9,8 +9,8 @@ public class TackleMovement : WaypointMovement
 
 	}
 
-	public void onWaypointReached()
+	public override void onWaypointReached()
 	{
-		waypoint = Vector2.Lerp(enemy.transform.position, target.transform)
+		waypoint = Vector2.Lerp(enemy.transform.position, target.transform.position, .5f);
 	}
 }
