@@ -63,7 +63,6 @@ public class move : MonoBehaviour {
 			Application.LoadLevel("level1");
 		}
 
-		/*
 		if (pickups <= 0 && !noArmorFlag) {
 			soundManager.loopSound ("NoArmor");
 			noArmorFlag = true;
@@ -71,7 +70,6 @@ public class move : MonoBehaviour {
 			soundManager.stopLoop("NoArmor");
 			noArmorFlag = false;
 		}
-		*/
 		
 		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
