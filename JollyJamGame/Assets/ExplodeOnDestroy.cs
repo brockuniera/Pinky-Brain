@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ExplodeOnDestroy : MonoBehaviour {
 
+	public GameObject _explosion;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,6 +17,6 @@ public class ExplodeOnDestroy : MonoBehaviour {
 
 	void OnDestroy()
 	{
-		Instantiate(Resources.Load("Explode"),transform.position, transform.rotation);
+		Instantiate(_explosion,transform.position, transform.rotation);
 	}
 }
