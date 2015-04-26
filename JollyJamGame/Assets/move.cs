@@ -31,12 +31,19 @@ public class move : MonoBehaviour {
 	private bool isWrappingY = false;
 	private Renderer[] renderers;
 
+	private bool noArmorFlag;
+
 	public int pickups {
 		get { return numPickups (); }
 	}
 
 	//TODO Add losing weight
 	//public void 
+
+	void Awake()
+	{
+		noArmorFlag = false;
+	}
 
 	void Start () {
 		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
@@ -49,6 +56,14 @@ public class move : MonoBehaviour {
 		//Read input values
 		if (trans) {
 			Application.LoadLevel(1);
+		}
+
+		if (pickups <= 0 && !noArmorFlag) {
+			soundManager.loopSound ("NoArmor");
+			noArmorFlag = true;
+		} else if(pickups > 0 && noArmorFlag) {
+			soundManager.stopLoop("NoArmor");
+			noArmorFlag = false;
 		}
 
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
@@ -121,6 +136,7 @@ public class move : MonoBehaviour {
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
 			//Parenting
 			soundManager.playSound("Attach");
+
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers
