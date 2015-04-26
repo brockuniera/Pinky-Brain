@@ -13,6 +13,9 @@ public class move : MonoBehaviour {
 	public float speed_max;
 	public float speed_mult;
 
+	//TODO Add losing weight
+	//public void 
+
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 	}

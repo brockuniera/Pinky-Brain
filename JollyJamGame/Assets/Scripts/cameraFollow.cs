@@ -3,6 +3,8 @@ using System.Collections;
 
 public class cameraFollow : MonoBehaviour {
 
+	public float XOffset;
+	public float YOffset;
 
 	private GameObject _player;
 	private float _zpos;
@@ -15,6 +17,8 @@ public class cameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pose = _player.transform.position;
+		pose.x += XOffset;
+		pose.y += YOffset;
 		pose.z = _zpos;
 		this.transform.position = pose;
 	}

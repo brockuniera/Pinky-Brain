@@ -38,7 +38,7 @@ public class MetalPickup : MonoBehaviour {
 					Detach();
 					_collected = false;
 				}
-				Destroy(c.gameObject);
+				//Destroy(c.gameObject);
 			}
 		}
 	}

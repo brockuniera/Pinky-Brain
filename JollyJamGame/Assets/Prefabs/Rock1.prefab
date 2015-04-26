@@ -26,7 +26,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472628}
-  - 61: {fileID: 6182940}
+  - 60: {fileID: 6030184}
   m_Layer: 0
   m_Name: Collisions
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132368}
   m_LocalRotation: {x: -.500000119, y: -.5, z: .5, w: .49999994}
-  m_LocalPosition: {x: 2, y: -.400000006, z: 0}
+  m_LocalPosition: {x: -5.32999992, y: -.0799999982, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472628}
@@ -90,8 +90,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132368}
   m_Mesh: {fileID: 4300000, guid: acf51472630254f638c08706977f375b, type: 3}
---- !u!61 &6182940
-BoxCollider2D:
+--- !u!60 &6030184
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -100,9 +100,22 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .501345038, y: -.159846261}
-  serializedVersion: 2
-  m_Size: {x: 4.18244362, y: 2.74380755}
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: .990802288, y: .930334747}
+      - {x: 1.47981775, y: .599892795}
+      - {x: 1.89354444, y: .58127141}
+      - {x: 2.16633701, y: .370941877}
+      - {x: 2.33772349, y: -.314644963}
+      - {x: 1.77225709, y: -1.0297904}
+      - {x: 1.13273203, y: -1.07555628}
+      - {x: .63611269, y: -1.61699998}
+      - {x: -.124352977, y: -1.13412297}
+      - {x: -1.00818813, y: -.981076062}
+      - {x: -1.37732983, y: -.615500748}
+      - {x: -1.27360928, y: .524532855}
+      - {x: -.974277616, y: .905046046}
 --- !u!95 &9572586
 Animator:
   serializedVersion: 3

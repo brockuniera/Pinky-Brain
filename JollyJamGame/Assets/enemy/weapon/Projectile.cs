@@ -17,9 +17,8 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
-	// boom go here
-	public void onContact()
-	{
-
+	void OnTriggerEnter2D(Collider2D c){
+		Destroy(gameObject);
 	}
 }
+
