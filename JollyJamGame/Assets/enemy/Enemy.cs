@@ -46,11 +46,11 @@ public class Enemy : MonoBehaviour {
 
 		switch (movementType) {
 		case MovementType.STRAFE:
-			movement = new StrafeMovement(this, player.transform, 10.0f, 20.0f);
+			movement = new StrafeMovement(this, player.transform, 10.0f, acceleration);
 			break;
 		
 		case MovementType.TACKLE:
-			movement = new TackleMovement(this, player.transform, 5.0f);
+			movement = new TackleMovement(this, player.transform, acceleration);
 			break;
 
 		default: case MovementType.NULL:
