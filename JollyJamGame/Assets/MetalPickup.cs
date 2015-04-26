@@ -28,6 +28,7 @@ public class MetalPickup : MonoBehaviour {
 		}
 	}
 
+	//Bullets
 	void OnTriggerEnter2D(Collider2D c){
 		if(_collected){
 			//Getting hit by a bullet
@@ -42,6 +43,7 @@ public class MetalPickup : MonoBehaviour {
 		}
 	}
 
+	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
 		if(_collected){

@@ -12,19 +12,20 @@ public class move : MonoBehaviour {
 	private float maxSpeed_rot; 
 	public float speed_max;
 	public float speed_mult;
-	// Use this for initialization
+
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
 
-	// Update is called once per frame
 	void Update () {
+		//Read input values
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = Input.GetAxis ("HorizontalRight");
 		rb2d.centerOfMass = Vector2.zero;
 	}
 
+	//Movement
 	void FixedUpdate () {
 		goalSpeed = speed_mult * rb2d.mass + speed_max;
 		Vector2 force_added = new Vector2 (xAxis_move * alt_move, yAxis_move * alt_move * -1f);
@@ -38,6 +39,7 @@ public class move : MonoBehaviour {
 		}
 	}
 
+	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
