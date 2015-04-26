@@ -46,17 +46,16 @@ public class MetalPickup : MonoBehaviour {
 		if(_collected){
 			//Picking up more metal
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
-				c.transform.parent.parent = this.transform;
+				c.transform.parent.parent = this.transform; //Wow lol
 				c.gameObject.layer = LayerMask.NameToLayer("Player");
 			}
 		}
-
 	}
 
 	//Handles detaching this metal and child metals too
 	public void Detach(){
 		transform.parent = null;
-		Destroy(gameObject);
+		Destroy(gameObject); //We just die right now
 		_collectable = false;
 		_collect_timer.SetTimer(TimeToRecollect);
 	}
