@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour {
 
 		transform.eulerAngles = new Vector3 (0.0f, 0.0f, 270.0f);
 
-		generate (difficulty);
+		generate (GameManager.Difficulty);
 
 		/*
 		switch (movementType) {
@@ -80,12 +80,12 @@ public class Enemy : MonoBehaviour {
 	private void generate(float difficultyFactor)
 	{
 		float BaseFireRate = .5f;
-		float BaseSpeed = 4.0f;
+		float BaseSpeed = 6.0f;
 
 		if (Random.Range (0, 2) == 0)
-			weapon = new Gun (this, player.transform, projectile, BaseFireRate, 10.0f * difficultyFactor);
+			weapon = new Gun (this, player.transform, projectile, BaseFireRate * difficultyFactor / 3.0f, 10.0f * difficultyFactor);
 		else
-			weapon = new Shotgun (this, player.transform, projectile, (BaseFireRate / 2.0f),
+			weapon = new Shotgun (this, player.transform, projectile, BaseFireRate * difficultyFactor / 6.0f,
 			                            10.0f * difficultyFactor, 20.0f, (int)(difficultyFactor * 3.0f));
 		
 		if (Random.Range (0, 2) == 0)
