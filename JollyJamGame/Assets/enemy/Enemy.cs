@@ -4,12 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour {
 
-
-	[SerializeField]
-	private float BaseSpeed = 10.0f;
-	[SerializeField]
-	private float BaseFireRate = 2.0f;
-
 	[SerializeField]
 	private Transform player;
 
@@ -32,19 +26,14 @@ public class Enemy : MonoBehaviour {
 	public enum MovementType { NULL, STRAFE, TACKLE };
 	public enum GunType { NULL, GUN, SHOTGUN };
 
-	//
-	//Mutators
-	//
-
-	void SetBaseSpeed(float bs){ BaseSpeed = bs; }
-	void SetBaseFireRate(float bs){ BaseFireRate = bs; }
-	
 	public IEnemyMovement movement;
 	public IWeapon weapon;
 
 	void Awake() {
 		rigidbody2D = GetComponent<Rigidbody2D> ();
 		player = GameObject.FindWithTag("Player").transform;
+
+		transform.eulerAngles = new Vector3 (0.0f, 0.0f, 270.0f);
 
 		switch (movementType) {
 		case MovementType.STRAFE:
@@ -61,7 +50,7 @@ public class Enemy : MonoBehaviour {
 
 		switch (gunType) {
 		case GunType.GUN:
-			weapon = new Gun(this, player.transform, projectile, 2.0f, 20.0f);
+			weapon = new Gun(this, player.transform, projectile, 2.0f, 5.0f);
 			break;
 
 		case GunType.SHOTGUN:
@@ -80,6 +69,10 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		// TODO this rotates on the wrong axis
+
+		Vector2 to = player.transform.position - transform.position;
+		transform.rotation = Quaternion.LookRotation (new Vector3 (to.x, to.y, transform.position.z), Vector3.forward);
 		movement.move (Time.fixedDeltaTime);
 	}
 
