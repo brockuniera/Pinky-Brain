@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11461730}
   m_Layer: 8
   m_Name: MetalBall
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72000003, y: .209999993, z: -.379999995}
+  m_LocalPosition: {x: -3.01999998, y: 7.86999989, z: -.379999995}
   m_LocalScale: {x: 1.32636702, y: 1.32636702, z: 1.32636702}
   m_Children:
   - {fileID: 493020}
@@ -72,7 +72,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156650}
-  m_LocalRotation: {x: -.386659503, y: -.235939309, z: -.842348516, w: .292020887}
+  m_LocalRotation: {x: -.386659443, y: -.235939279, z: -.842348397, w: .292020857}
   m_LocalPosition: {x: 0, y: 0, z: -.669999957}
   m_LocalScale: {x: .707180858, y: .7071805, z: .707180262}
   m_Children: []
@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f92fdb4b6ab8a947a6838b8fe835ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 189006, guid: 7f70d39803f1d474eb7c514e38964b1f, type: 2}
 --- !u!114 &11477304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsRandom: 0
-  weight: .200000003
+  weight: .600000024
   Min: 0
   Max: 0
 --- !u!114 &11486716
@@ -189,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dfdb68a2cc34ff681eac514ad22f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Depth: 0
   _collectable: 1
   TimeToRecollect: 1
   HitPoints: 1
