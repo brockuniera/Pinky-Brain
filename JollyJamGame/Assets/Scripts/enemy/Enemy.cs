@@ -109,4 +109,9 @@ public class Enemy : MonoBehaviour {
 		movement.move (Time.fixedDeltaTime);
 	}
 
+	void OnCollisionEnter2D(Collision2D c){
+		if(c.transform.parent.gameObject.layer == LayerMask.NameToLayer("Rock")){
+			Destroy(gameObject);
+		}
+	}
 }
