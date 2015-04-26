@@ -50,11 +50,11 @@ public class Enemy : MonoBehaviour {
 
 		switch (gunType) {
 		case GunType.GUN:
-			weapon = new Gun(this, player.transform, projectile, 2.0f, 5.0f);
+			weapon = new Gun(this, player.transform, projectile, 0.5f, 20.0f);
 			break;
 
 		case GunType.SHOTGUN:
-			weapon = new Shotgun(this, player.transform, projectile, 2.0f, 20.0f, 20.0f, 3);
+			weapon = new Shotgun(this, player.transform, projectile, 0.5f, 20.0f, 20.0f, 3);
 			break;
 
 		default: case GunType.NULL:

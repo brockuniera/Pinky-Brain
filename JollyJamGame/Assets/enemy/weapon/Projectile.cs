@@ -21,7 +21,8 @@ public class Projectile : MonoBehaviour {
 		if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
 			Destroy(c.transform.parent.gameObject);
 		}
-		Destroy(gameObject);
+		GameObject.Destroy (GetComponent<Rigidbody2D> ());
+		Destroy (gameObject, 0.5f);
 	}
 }
 
