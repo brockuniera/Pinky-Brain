@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 
 	public void Start()
 	{
-		Debug.Log (1);
 		soundManager.loopSound ("Armored Theme");
 	}
 }
