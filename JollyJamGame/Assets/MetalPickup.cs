@@ -5,7 +5,7 @@ public class MetalPickup : MonoBehaviour {
 	private bool _collected = false;
 
 	//Am I currently collectable by player?
-	private bool _collectable = true;
+	public bool _collectable = true;
 	private Timer _collect_timer;
 	public float TimeToRecollect;
 
@@ -29,6 +29,7 @@ public class MetalPickup : MonoBehaviour {
 	}
 
 	//Bullets
+	/*
 	void OnTriggerEnter2D(Collider2D c){
 		if(_collected){
 			//Getting hit by a bullet
@@ -40,6 +41,7 @@ public class MetalPickup : MonoBehaviour {
 			}
 		}
 	}
+	*/
 
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c) {
@@ -47,7 +49,7 @@ public class MetalPickup : MonoBehaviour {
 			//Picking up more metal
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
 				c.transform.parent.parent = this.transform; //Wow lol
-				c.gameObject.layer = LayerMask.NameToLayer("Player");
+				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			}
 		}
 	}

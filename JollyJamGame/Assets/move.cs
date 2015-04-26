@@ -7,11 +7,20 @@ public class move : MonoBehaviour {
 	private float xAxis_rotate;
 	private float xAxis_move;
 	private float yAxis_move;
+
+	//Cache rb2d
+	//
 	private Rigidbody2D rb2d;
+
+	//Movement multiplier
+	//
 	public float alt_move;
-	private float goalSpeed;
+
+	//Rotation
+	//
 	public float RotationSpeed;
-	private float maxSpeed_rot; 
+
+	//Acceleration
 	public float speed_max;
 	public float speed_mult;
 
@@ -27,19 +36,26 @@ public class move : MonoBehaviour {
 		xAxis_move = Input.GetAxis ("HorizontalLeft");
 		yAxis_move = Input.GetAxis ("VerticalLeft");
 		xAxis_rotate = -Input.GetAxis ("HorizontalRight");
-		rb2d.centerOfMass = Vector2.zero;
+
 	}
 
 	//Movement
 	void FixedUpdate () {
-		goalSpeed = speed_mult * rb2d.mass + speed_max;
+		//Every frame, to ensure rotations are correct
+		rb2d.centerOfMass = Vector2.zero;
+
+		float goalSpeed = speed_mult * rb2d.mass + speed_max;
 		Vector2 force_added = new Vector2 (xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		if (rb2d.velocity.sqrMagnitude < goalSpeed) {
 			rb2d.AddForce(force_added);
 			//rb2d.velocity = new Vector2(xAxis_move * alt_move, yAxis_move * alt_move * -1f);
 		} 
 		if(xAxis_rotate != 0.0f){
-			maxSpeed_rot = speed_max * rb2d.mass * RotationSpeed;
+			/*
+			float rotMax = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
+			print(rotMax);
+			*/
+
 			rb2d.angularVelocity = xAxis_rotate * RotationSpeed;
 		}
 	}
@@ -48,9 +64,15 @@ public class move : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c)
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
+			//Parenting
 			c.transform.parent.parent = this.transform;
+
+			//Setup layers
 			c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
-			c.gameObject.GetComponent<MetalPickup>().SetCollected(true);
+			//Enable child
+			c.transform.parent.GetComponent<MetalPickup>().SetCollected(true);
+
+			//get heavier
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
 		}
 	}

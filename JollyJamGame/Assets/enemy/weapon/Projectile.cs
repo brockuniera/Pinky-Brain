@@ -18,6 +18,9 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D c){
+		if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
+			Destroy(c.transform.parent.gameObject);
+		}
 		Destroy(gameObject);
 	}
 }
