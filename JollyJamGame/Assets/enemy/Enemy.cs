@@ -38,14 +38,7 @@ public class Enemy : MonoBehaviour {
 	public void Update()
 	{
 		weapon.aim (Time.deltaTime);
-
-		Projectile[] projectiles = weapon.fire ();
-		if (projectiles != null) {
-			for(int i = 0; i < projectiles.Length; i++)
-			{
-				// anything
-			}
-		}
+		weapon.fire ();
 	}
 
 	void FixedUpdate() {
