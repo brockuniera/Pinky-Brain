@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour {
 
 	void Awake() {
 		rigidbody2D = GetComponent<Rigidbody2D> ();
+		player = GameObject.FindWithTag("Player").transform;
 
 		switch (movementType) {
 		case MovementType.STRAFE:

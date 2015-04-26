@@ -98,7 +98,7 @@ TrailRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142380}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f957b54ee77c7c47ad50dca726caa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToDie: 0
+  TimeToDie: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

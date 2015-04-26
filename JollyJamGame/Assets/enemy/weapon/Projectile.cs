@@ -8,14 +8,11 @@ public class Projectile : MonoBehaviour {
 
 	void Start(){
 		_timer = new Timer();
-		//_timer.SetTimer(TimeToDie);
-		_timer.SetTimer(10f);
+		_timer.SetTimer(TimeToDie);
 	}
 
 	void Update(){
-		print(_timer.getTime);
 		if(_timer.isDone){
-			print("DIEING!!!");
 			Object.Destroy(gameObject);
 		}
 	}
