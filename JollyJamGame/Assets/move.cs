@@ -60,7 +60,7 @@ public class move : MonoBehaviour {
 	void Update () {
 		//For loading levels or something
 		if (trans) {
-			Application.LoadLevel(1);
+			Application.LoadLevel("level1");
 		}
 
 		/*

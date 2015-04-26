@@ -30,6 +30,7 @@ public class Gun : IWeapon
 	{
 		direction = Vector2.Angle (target.position, enemy.transform.position);
 		fireTimer += timestep;
+		Debug.Log (timestep);
 	}
 
 	public virtual Projectile[] fire()
