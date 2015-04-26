@@ -4,6 +4,9 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour {
 
+	private static float BaseSpeed = 10.0f;
+	private static float BaseFireRate = 2.0f;
+
 	[SerializeField]
 	private Transform player;
 
@@ -45,15 +48,17 @@ public class Enemy : MonoBehaviour {
 		Enemy enemy = (Instantiate((Resources.Load("placeholders/enemy") as GameObject))).GetComponent<Enemy>();
 
 		if (Random.Range (0, 2) == 0)
-			enemy.weapon = new Gun (enemy, target, bullet, 2.0f - (difficultyFactor * 0.1f), 10.0f * difficultyFactor);
+			enemy.weapon = new Gun (enemy, target, bullet, BaseFireRate + (difficultyFactor * 0.1f), 10.0f * difficultyFactor);
 		else 
-			enemy.weapon = new Shotgun (enemy, target, bullet, 4.0f - (difficultyFactor * 0.2f), 10.0f * difficultyFactor,
-			                           20.0f, (int)(difficultyFactor * 3.0f));
+			enemy.weapon = new Shotgun (enemy, target, bullet, (2.0f * BaseFireRate) + (difficultyFactor * 0.2f),
+			                            10.0f * difficultyFactor, 20.0f, (int)(difficultyFactor * 3.0f));
 
 		if (Random.Range (0, 2) == 0)
-			enemy.movement = new StrafeMovement(enemy, target, Random.Range(5.0f, 10.0f), 20.0f);
+			enemy.movement = new StrafeMovement(enemy, target, Random.Range(5.0f, 10.0f), BaseSpeed + (difficultyFactor * 2.0f));
 		else 
-			enemy.movement = new TackleMovement(enemy, target, 10.0f + (difficultyFactor * 2.0f));
+			enemy.movement = new TackleMovement(enemy, target, BaseSpeed + (difficultyFactor * 2.0f));
+
+		Debug.Log (enemy.movement);
 
 		return null;
 	}

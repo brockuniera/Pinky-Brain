@@ -1,25 +1,16 @@
 using System;
 using UnityEngine;
 
-public class TackleMovement : IEnemyMovement
+public class TackleMovement : WaypointMovement
 {
-	private Enemy enemy;
-	private Transform target;
-	private float acceleration;
-
-	private Rigidbody2D rigidbody2D;
-
 	public TackleMovement(Enemy enemy, Transform target, float acceleration)
+		: base(enemy, target, acceleration)
 	{
-		this.enemy = enemy;
-		this.target = target;
-		this.acceleration = acceleration;
 
-		rigidbody2D = enemy.GetComponent<Rigidbody2D> ();
 	}
 
-	public void move(float timestep)
+	public void onWaypointReached()
 	{
-		rigidbody2D.AddForce ((target.position - enemy.transform.position).normalized * acceleration, ForceMode2D.Force);
+		waypoint = Vector2.Lerp(enemy.transform.position, target.transform)
 	}
 }
