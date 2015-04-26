@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
 	public void Start()
 	{
 		soundManager.loopSound ("Armored Theme", 0.2f);
+		GameObject[] clones = GameObject.FindGameObjectsWithTag("Explosion");
+		foreach(GameObject t in clones)
+		{
+			Destroy(t.gameObject);
+		}
 	}
 
 	public void advanceWave()
