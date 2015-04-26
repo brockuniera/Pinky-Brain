@@ -30,6 +30,10 @@ public class Projectile : MonoBehaviour {
 			c.transform.parent.gameObject.GetComponent<MetalPickup>().Detach();
 			soundManager.playSound("Boom");
 		}
+		else if(c.gameObject.layer == LayerMask.NameToLayer("Player"))
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
 		GameObject.Destroy (GetComponent<Collider2D> ());
 		Destroy (gameObject, 0.5f);
