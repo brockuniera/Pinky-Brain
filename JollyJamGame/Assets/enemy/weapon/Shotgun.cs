@@ -25,6 +25,8 @@ public class Shotgun : Gun
 				Vector2 t = target.position - enemy.transform.position;
 				float angle = ((Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg) + UnityEngine.Random.Range(0.0f, spread) - (spread / 2.0f))
 					* Mathf.Deg2Rad;
+
+				Debug.Log(projectile.gameObject == null);
 				Rigidbody2D bullet = (UnityEngine.Object.Instantiate(projectile).gameObject).GetComponent<Rigidbody2D>();
 
 				if(enemy.barrel != null) bullet.gameObject.transform.position = enemy.barrel.transform.position;
