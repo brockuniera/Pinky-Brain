@@ -46,7 +46,7 @@ public class move : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c)
 	{
 		if (c.gameObject.layer == LayerMask.NameToLayer("Pickups")) {
-			c.transform.parent = this.transform;
+			c.transform.parent.parent = this.transform;
 			c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			c.gameObject.GetComponent<MetalPickup>().SetCollected(true);
 			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;

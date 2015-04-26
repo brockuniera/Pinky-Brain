@@ -46,8 +46,8 @@ public class MetalPickup : MonoBehaviour {
 		if(_collected){
 			//Picking up more metal
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
-				c.transform.parent = transform;
-				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
+				c.transform.parent.parent = this.transform;
+				c.gameObject.layer = LayerMask.NameToLayer("Player");
 			}
 		}
 
