@@ -43,7 +43,7 @@ GameObject:
   - 4: {fileID: 467896}
   - 114: {fileID: 11414424}
   - 114: {fileID: 11403640}
-  - 114: {fileID: 11470254}
+  - 114: {fileID: 11450890}
   m_Layer: 8
   m_Name: Metal
   m_TagString: Untagged
@@ -180,7 +180,7 @@ MonoBehaviour:
   _collectable: 1
   TimeToRecollect: 1
   HitPoints: 1
---- !u!114 &11470254
+--- !u!114 &11450890
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f92fdb4b6ab8a947a6838b8fe835ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 189006, guid: 7f70d39803f1d474eb7c514e38964b1f, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
