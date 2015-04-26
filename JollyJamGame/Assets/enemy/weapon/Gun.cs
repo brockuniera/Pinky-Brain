@@ -10,6 +10,7 @@ public class Gun : IWeapon
 	protected float velocity;
 
 	protected float fireTimer;
+	protected float fireThreshold;
 
 	protected float direction;
 
@@ -22,6 +23,7 @@ public class Gun : IWeapon
 		this.velocity = velocity;
 
 		fireTimer = 0.0f;
+		fireThreshold = 1.0f / fireRate;
 	}
 		
 	public void aim(float timestep)
@@ -32,7 +34,7 @@ public class Gun : IWeapon
 
 	public virtual Projectile[] fire()
 	{
-		if (fireTimer <= fireRate) {
+		if (fireTimer <= fireThreshold) {
 			return null;
 		} else {
 			Vector2 to = target.position - enemy.transform.position;
