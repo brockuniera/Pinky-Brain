@@ -12,7 +12,8 @@ public class MetalPickup : MonoBehaviour {
 	private Timer _collect_timer;
 	public float TimeToRecollect;
 
-
+	//Player reference
+	private GameObject player;
 
 	//My hit points
 	public int HitPoints = 1;
@@ -24,6 +25,10 @@ public class MetalPickup : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_collect_timer = new Timer();
+	}
+
+	void Awake(){
+		player = GameObject.FindWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -40,12 +45,14 @@ public class MetalPickup : MonoBehaviour {
 			if(c.gameObject.layer == LayerMask.NameToLayer("Pickups")){
 				c.transform.parent.parent = this.transform;
 				c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
+				SetCollected(true);
+				player.GetComponent<Rigidbody2D>().mass += GetComponent<Metal>().weight;
 			}
 		}
 	}
 
 	//Handles detaching this metal and child metals too
-	public float Detach(){
+	public void Detach(){
 		transform.parent = null;
 
 		_collectable = false;
@@ -54,14 +61,14 @@ public class MetalPickup : MonoBehaviour {
 		Destroy(gameObject); //We just die right now
 
 		//Kill children
-		float subtreemass = 0.0f;
+		float subtreemass = GetComponent<Metal>().weight;
 		foreach(Transform child in transform){
 			GameObject go = child.gameObject;
 			if(go.tag == "Metal"){
-				subtreemass += go.GetComponent<MetalPickup>().Detach();
+				go.GetComponent<MetalPickup>().Detach();
 			}
 		}
-		return subtreemass;
+		player.GetComponent<Rigidbody2D>().mass -= GetComponent<Metal>().weight;
 	}
 
 }

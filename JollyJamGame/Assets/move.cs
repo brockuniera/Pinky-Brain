@@ -81,7 +81,7 @@ public class move : MonoBehaviour {
 	}
 
 	//Movement
-	void FixedUpdate () {
+	void FixedUpdate(){
 		//Every frame, to ensure rotations are correct
 		rb2d.centerOfMass = Vector2.zero;
 
@@ -105,7 +105,6 @@ public class move : MonoBehaviour {
 
 		if(xAxis_rotate != 0.0f){
 			float rotSpeed = MaxRotationSpeedMult * rb2d.mass + MaxRotationSpeedBase;
-			print(rotSpeed);
 
 			rb2d.angularVelocity = xAxis_rotate * rotSpeed;
 		}
@@ -115,7 +114,7 @@ public class move : MonoBehaviour {
 	public void DropMetal(){
 		foreach(Transform c in transform){
 			if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
-				rb2d.mass -= c.gameObject.GetComponent<MetalPickup>().Detach();
+				c.gameObject.GetComponent<MetalPickup>().Detach();
 			}
 		}
 	}
@@ -130,12 +129,13 @@ public class move : MonoBehaviour {
 			c.transform.parent.parent = this.transform;
 
 			//Setup layers
+			c.transform.parent.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			c.gameObject.layer = LayerMask.NameToLayer("PlayerHeld");
 			//Enable child
 			c.transform.parent.GetComponent<MetalPickup>().SetCollected(true);
 
 			//get heavier
-			rb2d.mass += c.gameObject.GetComponent<Metal>().weight;
+			rb2d.mass += c.transform.parent.GetComponent<Metal>().weight;
 		}
 
 	}
@@ -170,7 +170,7 @@ public class move : MonoBehaviour {
 	{
 		int o = 0;
 		foreach (Transform t in transform) {
-			if(t.gameObject.layer == LayerMask.NameToLayer("Pickups"))
+			if(t.gameObject.layer == LayerMask.NameToLayer("PlayerHeld"))
 				o++;
 		}
 		

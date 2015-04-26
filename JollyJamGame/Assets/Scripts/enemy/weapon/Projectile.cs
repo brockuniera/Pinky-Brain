@@ -45,6 +45,7 @@ public class Projectile : MonoBehaviour {
 				//Push against player
 				Vector2 offset = (GetComponent<Rigidbody2D>().velocity).normalized;
 				c.attachedRigidbody.AddForce(offset * ForceToAddPlayer);
+				player.GetComponent<move>().DropMetal();
 			}
 		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
