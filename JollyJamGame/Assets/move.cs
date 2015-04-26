@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class move : MonoBehaviour {
 	//Death
@@ -112,10 +112,14 @@ public class move : MonoBehaviour {
 
 	//Drop all held metal
 	public void DropMetal(){
+		List<MetalPickup> toDetach = new List<MetalPickup>();
 		foreach(Transform c in transform){
 			if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
-				c.gameObject.GetComponent<MetalPickup>().Detach();
+				toDetach.Add(c.gameObject.GetComponent<MetalPickup>());
 			}
+		}
+		foreach(MetalPickup mp in toDetach){
+			mp.Detach();
 		}
 	}
 
