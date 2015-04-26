@@ -119,6 +119,16 @@ public class move : MonoBehaviour {
 		return false;
 	}
 */
+
+	//Drop all held metal
+	public void DropMetal(){
+		foreach(Transform c in transform){
+			if(c.gameObject.layer == LayerMask.NameToLayer("PlayerHeld")){
+				c.gameObject.GetComponent<MetalPickup>().Detach();
+			}
+		}
+	}
+
 	//Picking up metal
 	void OnCollisionEnter2D(Collision2D c)
 	{

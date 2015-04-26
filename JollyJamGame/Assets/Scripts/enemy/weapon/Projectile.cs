@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour {
 	private Timer _timer;
 	public float TimeToDie = 10f;
 	public float ForceToAdd;
+	public float ForceToAddPlayer;
 
 	void Start(){
 		soundManager = GameObject.FindWithTag ("GameController").GetComponent<GameManager> ().soundManager;
@@ -27,12 +28,22 @@ public class Projectile : MonoBehaviour {
 			//Push against player
 			Vector2 offset = (GetComponent<Rigidbody2D>().velocity).normalized;
 			c.attachedRigidbody.AddForce(offset * ForceToAdd);
+
+			//Knock/destroy metal or whatever
 			c.transform.parent.gameObject.GetComponent<MetalPickup>().Detach();
 			soundManager.playSound("Boom");
 		}
 		else if(c.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
-			Application.LoadLevel(Application.loadedLevel);
+			GameObject player = c.transform.parent.gameObject;
+			if(player.GetComponent<move>().pickups == 0){
+				//you died, idiot!
+				Application.LoadLevel(Application.loadedLevel);
+			}else{
+				//Push against player
+				Vector2 offset = (GetComponent<Rigidbody2D>().velocity).normalized;
+				c.attachedRigidbody.AddForce(offset * ForceToAddPlayer);
+			}
 		}
 		GameObject.Destroy (GetComponent<Rigidbody2D> ());
 		GameObject.Destroy (GetComponent<Collider2D> ());

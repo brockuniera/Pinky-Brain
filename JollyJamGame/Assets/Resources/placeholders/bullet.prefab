@@ -149,7 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeToDie: 10
-  ForceToAdd: 10
+  ForceToAdd: 60
+  ForceToAddPlayer: 200
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
