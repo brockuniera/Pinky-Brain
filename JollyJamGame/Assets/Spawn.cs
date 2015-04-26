@@ -11,17 +11,41 @@ public class Spawn : MonoBehaviour {
 	private int[] _xArray;
 	private int[] _yArray;
 
+	public bool _spawnOverTime = false;
+
 	private bool _fail = false;
 
 	private Vector2[] _positions;
 
+	private float _timer = 10;
+
 	// Use this for initialization
 	void Start () {
+		SpawnStuff();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+		if(_spawnOverTime)
+		{
+			_timer -= Time.deltaTime;
+		}
+		if(_timer <= 0)
+		{
+			SpawnStuff();
+			_timer = 15;
+		}
+
+	}
+
+	void SpawnStuff()
+	{
 		
 		_xArray = new int[(int)transform.localScale.x / _maxSize];
 		_yArray = new int[(int)transform.localScale.y / _maxSize];
 		_positions = new Vector2[_numSpawns];
-	
+		
 		for(int j = 0; j < _spawnTypes.Length; j++)
 		{
 			for(int i = 0; i < _spawnPercents[j] * _numSpawns; i++)
@@ -59,10 +83,6 @@ public class Spawn : MonoBehaviour {
 				}
 			}
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
 	}
 }
