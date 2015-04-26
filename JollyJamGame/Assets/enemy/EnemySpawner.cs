@@ -20,7 +20,11 @@ public class EnemySpawner : MonoBehaviour {
 			enemy.weapon = new Shotgun (enemy, target, bullet, (BaseFireRate / 2.0f) + (difficultyFactor * 0.2f),
 					10.0f * difficultyFactor, 20.0f, (int)(difficultyFactor * 3.0f));
 
-			enemy.movement = new StrafeMovement(enemy, target, Random.Range(5.0f, 10.0f), BaseSpeed + (difficultyFactor * 2.0f));
+		if (Random.Range (0, 2) == 0)
+			enemy.movement = new StrafeMovement (enemy, target, Random.Range (5.0f, 10.0f), BaseSpeed + (difficultyFactor * 2.0f));
+		else
+			enemy.movement = new EllipticalMovement (enemy, target, BaseSpeed + (difficultyFactor * 2.0f), Random.Range(3.0f, 10.0f),
+			                                         Random.Range(3.0f, 10.0f));
 
 		return null;
 	}
