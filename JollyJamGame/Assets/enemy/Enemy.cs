@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour {
 	[SerializeField]
 	private Transform player;
 
+	public Transform barrel;
+
 	[SerializeField]
 	private float acceleration;
 
