@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour {
 
 	private Rigidbody2D rigidbody2D;
 
+	private bool touchingRock;
+	private bool touchingPlayer;
+
 	/*
 	[SerializeField]
 	private MovementType movementType;
@@ -36,6 +39,8 @@ public class Enemy : MonoBehaviour {
 	public IWeapon weapon;
 
 	void Awake() {
+		touchingPlayer = touchingRock = false;
+
 		rigidbody2D = GetComponent<Rigidbody2D> ();
 		player = GameObject.FindWithTag("Player").transform;
 
@@ -110,8 +115,22 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D c){
-		if(c.transform.parent.gameObject.layer == LayerMask.NameToLayer("Rock")){
-			Destroy(gameObject);
+		if (c.gameObject.layer == LayerMask.NameToLayer ("Rock")) {
+			touchingRock = true;
+		} else if (c.gameObject.layer == LayerMask.NameToLayer ("Player")) {
+			touchingPlayer = true;
+		}
+
+		if (touchingPlayer && touchingRock)
+			Destroy (gameObject);
+	}
+
+	void OnCollisionExit2D(Collision2D c)
+	{
+		if (c.gameObject.layer == LayerMask.NameToLayer ("Rock")) {
+			touchingRock = false;
+		} else if (c.gameObject.layer == LayerMask.NameToLayer ("Player")) {
+			touchingPlayer = false;
 		}
 	}
 }
