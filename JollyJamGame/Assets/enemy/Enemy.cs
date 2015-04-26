@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour {
 		rigidbody2D = GetComponent<Rigidbody2D> ();
 		player = GameObject.FindWithTag("Player").transform;
 
+		transform.eulerAngles = new Vector3 (0.0f, 0.0f, 270.0f);
+
 		switch (movementType) {
 		case MovementType.STRAFE:
 			movement = new StrafeMovement(this, player.transform, 10.0f, acceleration);
@@ -69,8 +71,8 @@ public class Enemy : MonoBehaviour {
 	void FixedUpdate() {
 		// TODO this rotates on the wrong axis
 
-		//Vector2 to = player.transform.position - transform.position
-		//transform.rotation = Quaternion.LookRotation (new Vector3 (to.x, to.y, transform.position.z));
+		Vector2 to = player.transform.position - transform.position;
+		transform.rotation = Quaternion.LookRotation (new Vector3 (to.x, to.y, transform.position.z), Vector3.forward);
 		movement.move (Time.fixedDeltaTime);
 	}
 
